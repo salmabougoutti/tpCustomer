@@ -1,4 +1,4 @@
-package ma.emsi.tpcutomerbougoutti;
+package ma.emsi.tpcutomerbougoutti.entity;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
