@@ -4,36 +4,69 @@
  */
 package ma.emsi.tpcutomerbougoutti.jsf;
 
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.io.Serializable;
+import java.util.List;
 import ma.emsi.tpcutomerbougoutti.entity.Customer;
+import ma.emsi.tpcutomerbougoutti.entity.Discount;
 import ma.emsi.tpcutomerbougoutti.service.CustomerManager;
+import ma.emsi.tpcutomerbougoutti.service.DiscountManger;
+
 
 /**
  *
  * @author M2B PRO
  */
+@Named
+@ViewScoped
 public class CustomerDetailsBean implements Serializable{
-    private int idCustomer;
+   private int idCustomer;
+
+    /**
+     *
+     */
     private Customer customer;
-    @Inject 
-    private CustomerManager customerManager;
+
+    /**
+     *
+     */
+    @Inject
+  private CustomerManager customerManager;
+
+    /**
+     *
+     */
+    @Inject
+  private DiscountManger discountManger;
+  
+    /**
+     *
+     * @return
+     */
     public int getIdCustomer() {
     return idCustomer;
   }
 
-  public void setIdCustomer(int idCustomer) {
+    /**
+     *
+     * @param idCustomer
+     */
+    public void setIdCustomer(int idCustomer) {
     this.idCustomer = idCustomer;
   }
 
   /**
    * Retourne les détails du client courant (contenu dans l'attribut customer de
    * cette classe).
+     * @return 
    */
     public Customer getCustomer() {
       return customer;
     }
-    /**
+
+  /**
    * Action handler - met à jour dans la base de données les données du client
    * contenu dans la variable d'instance customer.
    * @return la prochaine page à afficher, celle qui affiche la liste des clients.
@@ -45,7 +78,17 @@ public class CustomerDetailsBean implements Serializable{
     return "customerList";
   }
 
-  public void loadCustomer() {
+    /**
+     *
+     */
+    public void loadCustomer() {
     this.customer = customerManager.findById(idCustomer);
+  }
+  /**
+   * Retourne la liste de tous les Discount.
+     * @return 
+   */
+  public List<Discount> getDiscounts() {
+    return discountManger.getAllDiscounts();
   }
 }
